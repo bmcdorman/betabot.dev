@@ -32,3 +32,5 @@ const LabeledText = ({ label, labelWidth, value, onValueChange, style, className
     <StyledInput value={value} onValueChange={onValueChange} />
   </Container>
 );
+
+export default LabeledText;

@@ -10,8 +10,9 @@ import IRgba from '@/math/IRgba';
 import TitleBar from './TitleBar';
 import FlexSpacer from '@/ui/primitives/FlexSpacer';
 import Button from '@/ui/primitives/Button';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from '@/pages/Home';
+import Contact from '@/pages/Contact';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
@@ -46,6 +47,8 @@ const Root = () => {
 
   const path = window.location.pathname;
 
+  const navigate = useNavigate();
+
   return (
     <OuterContainer $theme={theme}>
       <InnerContainer $theme={theme}>
@@ -55,17 +58,20 @@ const Root = () => {
             Component.create(FlexSpacer),
             Component.create(MenuButton, {
               children: 'Home',
-              $selected: path === '/'
+              $selected: path === '/',
+              onClick: () => navigate('/')
             }),
             Component.create(MenuButton, {
               children: 'Contact',
-              $selected: path === '/contact'
+              $selected: path === '/contact',
+              onClick: () => navigate('/contact')
             }),
           ]}
         />
         <PageContainer>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </PageContainer>
       </InnerContainer>
