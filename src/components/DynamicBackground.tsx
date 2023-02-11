@@ -36,7 +36,7 @@ const Svg = styled('svg', {
 
 const BASE_HSL = new Hsl(281, 1, 0.22);
 const PROJECTS_HSL = new Hsl(281 + 30, 1, 0.22);
-const CONTACT_HSL = new Hsl((281 + 60) % 360, 1, 0.22);
+const CONTACT_HSL = new Hsl(281 + 60, 1, 0.22);
 
 const ANIMATION_DURATION = 5000;
 

@@ -15,7 +15,9 @@ class Hsl implements IHsl, ILinearInterpolation<Hsl> {
    * @param s The saturation, in the range [0, 1]
    * @param l The lightness, in the range [0, 1]
    */
-  constructor(public h: number, public s: number, public l: number) {}
+  constructor(public h: number, public s: number, public l: number) {
+    h = h % 360;
+  }
 
   toRgb(): Rgb {
     const [r, g, b] = hsl2rgb(this.h, this.s, this.l);
