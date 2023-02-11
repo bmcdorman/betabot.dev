@@ -14,6 +14,7 @@ const Container = styled('button', ({ onClick }: ButtonProps) => ({
   backgroundColor: 'transparent',
   fontSize: 'inherit',
   cursor: onClick ? 'pointer' : 'default',
+  color: 'inherit'
 }));
 
 const Button = (props: ButtonProps) => (

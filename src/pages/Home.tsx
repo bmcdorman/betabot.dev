@@ -12,7 +12,6 @@ const Paragraph = styled('p', {
 const Home = () => {
   return (
     <Container>
-      <h1>Home</h1>
       <Paragraph>
         betabot brings expert-level consulting and contracting services to a number of software disciplines, including:
         <ul>
@@ -21,14 +20,6 @@ const Home = () => {
           <li>Desktop Applications</li>
           <li>Cloud/DevOps</li>
         </ul>
-      </Paragraph>
-      <Paragraph>
-        betabot has over 20 years of software engineering experience in a wide range of fields and early-stage startup to Fortune 100 level experience.
-        We can build a robust and customer-driven solution to your problem from the ground up, or advise an existing project.
-      </Paragraph>
-      <Paragraph>
-        betabot has over 20 years of software engineering experience in a wide range of fields and early-stage startup to Fortune 100 level experience.
-        We can build a robust and customer-driven solution to your problem from the ground up, or advise an existing project.
       </Paragraph>
       <Paragraph>
         betabot has over 20 years of software engineering experience in a wide range of fields and early-stage startup to Fortune 100 level experience.

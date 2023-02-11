@@ -56,7 +56,6 @@ const Contact = () => {
 
   return (
     <Container>
-      <h1>Contact</h1>
       <FormComponent form={form} />
     </Container>
   );

@@ -35,14 +35,13 @@ const Svg = styled('svg', {
 
 
 const BASE_HSL = new Hsl(281, 1, 0.22);
-const PROJECTS_HSL = new Hsl(281 + 30, 1, 0.22);
-const CONTACT_HSL = new Hsl(281 + 60, 1, 0.22);
 
 const ANIMATION_DURATION = 5000;
 
 const PATH_COLORS = {
-  '/projects': PROJECTS_HSL,
-  '/contact': CONTACT_HSL
+  '/projects': new Hsl(281 + 30, 1, 0.22),
+  '/about': new Hsl(281 + 60, 1, 0.22),
+  '/contact': new Hsl(281 + 90, 1, 0.22)
 };
 
 const pathColor = (path: string) => {

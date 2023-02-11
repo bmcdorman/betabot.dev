@@ -5,9 +5,7 @@ import { styled } from 'styletron-react';
 const TitleBar = styled(MenuBar, {
   fontSize: '32px',
   padding: '16px',
-  position: 'sticky',
-  top: '-1',
-  backgroundColor: 'rgba(255, 255, 255, 0.66)',
+  backgroundColor: 'rgba(255, 255, 255, 0.60)',
   backdropFilter: 'blur(12px)',
   borderTopLeftRadius: '0.5em',
   borderTopRightRadius: '0.5em',
