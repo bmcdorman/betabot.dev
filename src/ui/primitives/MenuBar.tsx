@@ -7,7 +7,7 @@ import ThemeContext from '../theme/ThemeContext';
 import ThemeProps from '../util/ThemeProps';
 
 export interface MenuBarProps extends StyleProps {
-  components: Component<StyleProps>[];
+  components: Component<StyleProps & { key?: string | number }>[];
 }
 
 type Props = MenuBarProps;
@@ -15,7 +15,6 @@ type Props = MenuBarProps;
 const Container = styled('div', ({ $theme }: ThemeProps) => ({
   display: 'flex',
   alignItems: 'center',
-  borderBottom: `1px solid ${IRgba.toCss($theme.borderColor)}`,
 }));
 
 const MenuBar = ({ components, style, className }: Props) => {
@@ -24,7 +23,7 @@ const MenuBar = ({ components, style, className }: Props) => {
   return (
     <Container $theme={theme} style={style} className={className}>
       {components.map((component, i) =>
-        Component.render(component)
+        Component.render(component, { key: i })
       )}
     </Container>
   );

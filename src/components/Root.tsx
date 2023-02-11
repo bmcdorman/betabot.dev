@@ -13,23 +13,23 @@ import Button from '@/ui/primitives/Button';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Contact from '@/pages/Contact';
+import DynamicBackground from './DynamicBackground';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
   minHeight: '100vh',
-  backgroundColor: IRgba.toCss($theme.marginBackgroundColor),
-  padding: '1em'
 }));
 
 const InnerContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '768px',
+  '@media screen and (max-width: calc(768px + 1em))': { width: '100%', borderRadius: 0, margin: 0 },
   color: IRgba.toCss($theme.textColor),
-  backgroundColor: IRgba.toCss($theme.backgroundColor),
+  backgroundColor: 'rgba(255, 255, 255, 0.65)',
   margin: '0 auto',
-  borderRadius: '0.5em',
+  borderBottomLeftRadius: '0.5em',
+  borderBottomRightRadius: '0.5em',
   overflow: 'hidden',
-  border: `1px solid ${IRgba.toCss($theme.borderColor)}`,
-  boxShadow: `0 0 0.5em #bbb`,
+  backdropFilter: 'blur(10px)'
 }));
 
 const PageContainer = styled('div', {
@@ -51,6 +51,7 @@ const Root = () => {
 
   return (
     <OuterContainer $theme={theme}>
+      <DynamicBackground />
       <InnerContainer $theme={theme}>
         <TitleBar
           components={[

@@ -14,6 +14,7 @@ const Container = styled('textarea', {
 });
 
 export interface TextAreaProps {
+  placeholder?: string;
   value: string;
   onValueChange: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void;
   style?: React.CSSProperties;
@@ -22,10 +23,11 @@ export interface TextAreaProps {
 
 type Props = TextAreaProps;
 
-const TextArea = ({ value, onValueChange, style, className }: Props) => (
+const TextArea = ({ placeholder, value, onValueChange, style, className }: Props) => (
   <Container
     style={style}
     className={className}
+    placeholder={placeholder}
     value={value}
     onChange={event => onValueChange(event.target.value, event)}
   />

@@ -1,20 +1,22 @@
 import StyleProps from '@/ui/util/StyleProps';
 import * as React from 'react';
-import Input from '.';
+import Input from './Native';
 
 export interface TextProps extends StyleProps {
+  placeholder?: string;
   value: string;
   onValueChange: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void;
 }
 
 type Props = TextProps;
 
-const Text = ({ style, className, value, onValueChange }: Props) => {
+const Text = ({ style, className, placeholder, value, onValueChange }: Props) => {
   return (
     <Input
       type="text"
       style={style}
       className={className}
+      placeholder={placeholder}
       value={value}
       onChange={event => onValueChange(event.target.value, event)}
     />

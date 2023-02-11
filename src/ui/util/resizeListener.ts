@@ -46,7 +46,7 @@ class Polled implements ResizeListener {
   }
   
   observe(element: Element) {
-    this.elements_.set(element, { x: 0, y: 0 });
+    this.elements_.set(element, new Vector2(0, 0));
     this.updateTick_();
   }
 
@@ -77,14 +77,14 @@ class Evented implements ResizeListener {
       const borderBox: ResizeObserverSize = Array.isArray(borderBoxSize)
         ? borderBoxSize[0] as ResizeObserverSize
         : borderBoxSize as ResizeObserverSize;
-      return { x: borderBox.inlineSize, y: borderBox.blockSize };
+      return new Vector2(borderBox.inlineSize, borderBox.blockSize);
     } else if (entry.contentRect) {
       // Safari doesn't return borderBoxSize, so fall back to contentRect
-      return { x: entry.contentRect.width, y: entry.contentRect.height };
+      return new Vector2(entry.contentRect.width, entry.contentRect.height);
     }
     
     console.error('failed to get size of ResizeObserverEntry');
-    return { x: 0, y: 0 };
+    return Vector2.ZERO;
   }
   
   constructor(callback: ResizeCallback) {

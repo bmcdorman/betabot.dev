@@ -1,4 +1,5 @@
 import IRgb from './IRgb';
+import Vector3 from './Vector3';
 
 class Rgb implements IRgb {
   constructor(public r: number, public g: number, public b: number) {}
@@ -16,6 +17,10 @@ class Rgb implements IRgb {
       .split(',')
       .map((x) => parseInt(x, 10));
     return new Rgb(r, g, b);
+  }
+
+  toVector3(): Vector3 {
+    return new Vector3(this.r, this.g, this.b);
   }
 }
 
