@@ -28,7 +28,11 @@ class Hsl implements IHsl, ILinearInterpolation<Hsl> {
     const hDiff = toH - h;
     const sDiff = toS - s;
     const lDiff = toL - l;
-    return new Hsl(h + hDiff * t, s + sDiff * t, l + lDiff * t);
+    let adjustedH = (h + hDiff * t) % 360;
+    if (adjustedH < 0) {
+      adjustedH += 360;
+    }
+    return new Hsl(adjustedH, s + sDiff * t, l + lDiff * t);
   }
 }
 

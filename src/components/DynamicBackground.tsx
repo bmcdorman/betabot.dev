@@ -34,11 +34,20 @@ const Svg = styled('svg', {
 });
 
 
-const BASE_HSL = new Hsl(205, 0.433, 0.647);
-const PROJECTS_HSL = new Hsl(325, 0.433, 0.647);
-const CONTACT_HSL = new Hsl(85, 0.433, 0.647);
+const BASE_HSL = new Hsl(281, 1, 0.22);
+const PROJECTS_HSL = new Hsl(281 + 30, 1, 0.22);
+const CONTACT_HSL = new Hsl((281 + 60) % 360, 1, 0.22);
 
-const ANIMATION_DURATION = 1000;
+const ANIMATION_DURATION = 5000;
+
+const PATH_COLORS = {
+  '/projects': PROJECTS_HSL,
+  '/contact': CONTACT_HSL
+};
+
+const pathColor = (path: string) => {
+  return PATH_COLORS[path] || BASE_HSL;
+};
 
 
 class DynamicBackground extends React.PureComponent<DynamicBackground.Props, DynamicBackground.State> {
@@ -165,8 +174,8 @@ class DynamicBackground extends React.PureComponent<DynamicBackground.Props, Dyn
       );
     }
 
-    const colorAnimation: Animation<Hsl, SineInOut<Hsl>> = new Animation(new SineInOut(BASE_HSL, BASE_HSL), 0);
-    colorAnimation.play();
+    const color = pathColor(window.location.pathname);
+    const colorAnimation: Animation<Hsl, SineInOut<Hsl>> = new Animation(new SineInOut(color, color), 1);
 
     this.state = {
       startVertices,
@@ -237,21 +246,15 @@ class DynamicBackground extends React.PureComponent<DynamicBackground.Props, Dyn
 
     const path = window.location.pathname;
     if (path !== currentPath) {
-      switch (path) {
-        case '/contact':
-          nextColorAnimation = new Animation(new SineInOut(colorAnimation.value, CONTACT_HSL), ANIMATION_DURATION);
-          break;
-        default:
-          nextColorAnimation = new Animation(new SineInOut(colorAnimation.value, BASE_HSL), ANIMATION_DURATION);
-          break;
-      }
-      nextColorAnimation.play();
+      const color = pathColor(path);
+      nextColorAnimation = new Animation(new SineInOut(colorAnimation.value, color), ANIMATION_DURATION);
     }
 
     this.setState({
       currentVertices: nextCurrentVertices,
       velocities: nextVelocities,
-      colorAnimation: nextColorAnimation
+      colorAnimation: nextColorAnimation,
+      currentPath: path,
     });
 
     this.tickHandle_ = window.requestAnimationFrame(this.tick_);
@@ -278,8 +281,6 @@ class DynamicBackground extends React.PureComponent<DynamicBackground.Props, Dyn
               const normal = vAB.cross(vAC).normalize();
 
 
-              const colorAnimationValue = colorAnimation.value;
-              console.log(colorAnimationValue.toRgb())
               const rgb = colorAnimation.value.toRgb().toVector3().add(normal.multiplyScalar(10));
 
               const red = Math.round(Math.max(0, Math.min(255, rgb.x)));
