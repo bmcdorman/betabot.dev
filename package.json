@@ -29,6 +29,7 @@
     "typescript": ">=3.0.0"
   },
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "bundle": "parcel build src/index.html"
   }
 }
