@@ -27,24 +27,29 @@ const Contact = () => {
       firstName: FormItemModel.labeledText({
         label: 'First Name',
         value: data.firstName,
-        onValueChange: value => setData({ ...data, firstName: value })
+        onValueChange: value => setData({ ...data, firstName: value }),
+        placeholder: 'Jane'
       }),
       lastName: {
         type: FormItemModel.Type.LabeledText,
         label: 'Last Name',
         value: data.lastName,
-        onValueChange: value => setData({ ...data, lastName: value })
+        onValueChange: value => setData({ ...data, lastName: value }),
+        placeholder: 'Doe'
       },
       email: {
         type: FormItemModel.Type.LabeledText,
         label: 'Email',
         value: data.email,
-        onValueChange: value => setData({ ...data, email: value })
+        onValueChange: value => setData({ ...data, email: value }),
+        placeholder: 'jane.doe@gmail.com'
       },
       message: {
         type: FormItemModel.Type.TextArea,
         value: data.message,
-        onValueChange: value => setData({ ...data, message: value })
+        placeholder: 'Message',
+        onValueChange: value => setData({ ...data, message: value }),
+        style: { height: '10em' },
       }
     },
     rows: [

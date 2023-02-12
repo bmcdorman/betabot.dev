@@ -6,22 +6,35 @@ import { styled } from 'styletron-react';
 import ThemeContext from '../theme/ThemeContext';
 import ThemeProps from '../util/ThemeProps';
 
+export enum MenuBarDirection {
+  Horizontal,
+  Vertical
+}
+
+
 export interface MenuBarProps extends StyleProps {
   components: Component<StyleProps & { key?: string | number }>[];
+  dir?: MenuBarDirection;
 }
 
 type Props = MenuBarProps;
 
-const Container = styled('div', ({ $theme }: ThemeProps) => ({
+const Container = styled('div', ({ $theme, $dir }: ThemeProps & { $dir: MenuBarDirection }) => ({
   display: 'flex',
+  flexDirection: $dir === MenuBarDirection.Horizontal ? 'row' : 'column',
   alignItems: 'center',
 }));
 
-const MenuBar = ({ components, style, className }: Props) => {
+const MenuBar = ({ components, style, className, dir }: Props) => {
   const theme = useContext(ThemeContext)
 
   return (
-    <Container $theme={theme} style={style} className={className}>
+    <Container
+      $theme={theme}
+      $dir={dir || MenuBarDirection.Horizontal}
+      style={style}
+      className={className}
+    >
       {components.map((component, i) =>
         Component.render(component, { key: i })
       )}

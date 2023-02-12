@@ -16,30 +16,33 @@ export namespace FormItemModel {
     TextArea = 'text-area',
   }
 
-  export interface Text {
+  export interface Text extends StyleProps {
     type: Type.Text;
     value: string;
     placeholder?: string;
     onValueChange: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   }
 
   export const text = construct<Text>(Type.Text);
 
-  export interface LabeledText {
+  export interface LabeledText extends StyleProps {
     type: Type.LabeledText;
     label: string;
     value: string;
     placeholder?: string;
     onValueChange: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   }
 
   export const labeledText = construct<LabeledText>(Type.LabeledText);
 
-  export interface TextArea {
+  export interface TextArea extends StyleProps {
     type: Type.TextArea;
     value: string;
     placeholder?: string;
     onValueChange: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   }
 
   export const textArea = construct<TextArea>(Type.TextArea);
@@ -51,6 +54,9 @@ export namespace FormItemModel {
           value={formItem.value}
           onValueChange={formItem.onValueChange}
           placeholder={formItem.placeholder}
+          onKeyDown={formItem.onKeyDown}
+          style={formItem.style}
+          className={formItem.className}
           {...extraProps}
         />
       );
@@ -61,6 +67,9 @@ export namespace FormItemModel {
           labelWidth={labelWidth}
           onValueChange={formItem.onValueChange}
           placeholder={formItem.placeholder}
+          onKeyDown={formItem.onKeyDown}
+          style={formItem.style}
+          className={formItem.className}
           {...extraProps}
         />
       );
@@ -69,6 +78,9 @@ export namespace FormItemModel {
           value={formItem.value}
           onValueChange={formItem.onValueChange}
           placeholder={formItem.placeholder}
+          onKeyDown={formItem.onKeyDown}
+          style={formItem.style}
+          className={formItem.className}
           {...extraProps}
         />
       );
@@ -99,6 +111,25 @@ const Container = styled('div', {
   width: '100%',
 });
 
+const Row = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  marginTop: '0.5em',
+  ':first-child': {
+    marginTop: 0,
+  },
+  width: '100%'
+});
+
+const Cell = styled('div', {
+  flex: 1,
+  marginLeft: '0.5em',
+  ':first-child': {
+    marginLeft: 0,
+  },
+});
+
+
 const Form = ({ style, className, form }: Props) => {
   const ref = React.createRef<HTMLDivElement>();
   
@@ -123,9 +154,13 @@ const Form = ({ style, className, form }: Props) => {
   return (
     <Container ref={ref} style={style} className={className}>
       {form.rows.map((row, i) => (
-        <div key={i}>
-          {row.map((id, j) => FormItemModel.render(form.items[id], maxLabelWidth, { key: j }))}
-        </div>
+        <Row key={i}>
+          {row.map((id, j) => (
+            <Cell key={j}>
+              {FormItemModel.render(form.items[id], maxLabelWidth)}
+            </Cell>
+          ))}
+        </Row>
       ))}
     </Container>
   );

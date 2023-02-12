@@ -10,6 +10,8 @@ interface LabeledText extends StyleProps {
 
   value: string;
   onValueChange: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void;
+
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 type Props = LabeledText;
@@ -34,6 +36,7 @@ const LabeledText = ({
   placeholder,
   value,
   onValueChange,
+  onKeyDown,
   style,
   className
 }: Props) => (
@@ -44,6 +47,7 @@ const LabeledText = ({
       {label}
     </Label>
     <StyledTextInput
+      onKeyDown={onKeyDown}
       placeholder={placeholder}
       value={value}
       onValueChange={onValueChange}

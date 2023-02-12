@@ -6,17 +6,27 @@ export interface TextProps extends StyleProps {
   placeholder?: string;
   value: string;
   onValueChange: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void;
+
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 type Props = TextProps;
 
-const Text = ({ style, className, placeholder, value, onValueChange }: Props) => {
+const Text = ({
+  style,
+  className,
+  placeholder,
+  value,
+  onValueChange,
+  onKeyDown
+}: Props) => {
   return (
     <Input
       type="text"
       style={style}
       className={className}
       placeholder={placeholder}
+      onKeyDown={onKeyDown}
       value={value}
       onChange={event => onValueChange(event.target.value, event)}
     />
