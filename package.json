@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "betabot LLC website",
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "main": "express.js",
   "author": "betabot LLC",
   "license": "UNLICENSED",
   "private": true,
