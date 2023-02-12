@@ -12,7 +12,7 @@ import SineInOut from '@/animation/SineInOut';
 const Container = styled('div', {
   width: '100vw',
   height: '100vh',
-  '@supports(-webkit-fill-available)': {
+  '@supports(min-height: -webkit-fill-available)': {
     minHeight: '-webkit-fill-available',
   },
   position: 'fixed',

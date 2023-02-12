@@ -20,7 +20,7 @@ const Container = styled('div', ({ $theme, $invisible }: ThemeProps & { $invisib
   backgroundColor: 'rgba(0, 0, 0, 0.66)',
   backdropFilter: $invisible ? 'none' : 'blur(12px)',
   height: '100vh',
-  '@supports(-webkit-fill-available)': {
+  '@supports(min-height: -webkit-fill-available)': {
     minHeight: '-webkit-fill-available',
   },
   width: '100vw',
