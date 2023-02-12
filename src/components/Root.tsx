@@ -27,6 +27,9 @@ const TRANSITION_WIDTH = `calc(768px + 1em)`;
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
   minHeight: '100vh',
+  '@supports(-webkit-fill-available)': {
+    minHeight: '-webkit-fill-available',
+  },
   paddingTop: '1em',
   [`@media screen and (max-width: ${TRANSITION_WIDTH})`]: {
     paddingTop: 0
