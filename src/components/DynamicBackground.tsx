@@ -11,10 +11,6 @@ import SineInOut from '@/animation/SineInOut';
 
 const Container = styled('div', {
   width: '100vw',
-  height: '100vh',
-  '@supports(min-height: -webkit-fill-available)': {
-    minHeight: '-webkit-fill-available',
-  },
   position: 'fixed',
   top: 0,
   left: 0,
@@ -267,7 +263,7 @@ class DynamicBackground extends React.PureComponent<DynamicBackground.Props, Dyn
     const { currentVertices, triangles, size, colorAnimation } = state;
     const { x, y } = size;
     return (
-      <Container>
+      <Container className='fill-height'>
         <InnerContainer ref={this.bindContainerRef_}>
           <Svg viewBox={`0 0 ${x} ${y}`} preserveAspectRatio="none">
             {triangles.map(({ a, b, c }, i) => {

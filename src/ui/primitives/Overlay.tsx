@@ -19,10 +19,6 @@ export const OVERLAY_EASING_DURATION = 0.2;
 const Container = styled('div', ({ $theme, $invisible }: ThemeProps & { $invisible: boolean }) => ({
   backgroundColor: 'rgba(0, 0, 0, 0.66)',
   backdropFilter: $invisible ? 'none' : 'blur(12px)',
-  height: '100vh',
-  '@supports(min-height: -webkit-fill-available)': {
-    minHeight: '-webkit-fill-available',
-  },
   width: '100vw',
   position: 'absolute',
   display: 'flex',
@@ -44,7 +40,7 @@ const Overlay = ({ children, invisible, onClick, style, className }: Props) => {
       $theme={theme}
       $invisible={invisible}
       style={style}
-      className={className}
+      className={`${className} fill-height`}
       onClick={onClick}
     >
       {children}
