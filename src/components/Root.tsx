@@ -57,7 +57,7 @@ const PageContainer = styled('div', {
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
 });
 
-const MenuButton = styled(Button, ({ $selected }: { $selected: boolean }) => ({
+const HMenuButton = styled(Button, ({ $selected }: { $selected: boolean }) => ({
   opacity: $selected ? 1 : 0.4,
   ':hover': $selected ? {} : {
     opacity: 0.6
@@ -74,10 +74,22 @@ const MenuButton = styled(Button, ({ $selected }: { $selected: boolean }) => ({
   },
 }));
 
+const VMenuButton = styled(Button, ({ $selected }: { $selected: boolean }) => ({
+  opacity: $selected ? 1 : 0.4,
+  ':hover': $selected ? {} : {
+    opacity: 0.6
+  },
+  fontFamily: `'Montserrat', sans-serif`,
+  fontSize: '0.7em',
+  transition: 'opacity 0.2s ease-in-out',
+  userSelect: 'none',
+  paddingTop: '0.5em',
+  paddingBottom: '0.5em',
+}));
+
 const OverlayMenuBar = styled(MenuBar, ({ $theme }: ThemeProps) => ({
-  justifyContent: 'space-around',
+  justifyItems: 'stretch',
   width: '100%',
-  height: '100%',
   fontSize: '3em',
   color: '#fff'
 }));
@@ -127,28 +139,36 @@ const Root = () => {
 
   const title = Component.create(Title);
   const flexSpacer = Component.create(FlexSpacer);
-  const home = Component.create(MenuButton, {
+  const homeProps = {
     children: 'Home',
     $selected: path === '/',
     onClick: navigateTo('/')
-  });
-  const projects = Component.create(MenuButton, {
+  };
+
+  const projectsProps = {
     children: 'Projects',
     $selected: path === '/projects',
     onClick: navigateTo('/projects')
-  });
-  const about = Component.create(MenuButton, {
+  };
+
+  const aboutProps = {
     children: 'About',
     $selected: path === '/about',
     onClick: navigateTo('/about')
-  });
-  const contact = Component.create(MenuButton, {
+  };
+
+  const contactProps = {
     children: 'Contact',
     $selected: path === '/contact',
     onClick: navigateTo('/contact')
-  });
+  };
 
   if (width > MENU_COLLAPSE_WIDTH) {
+    const home = Component.create(HMenuButton, homeProps);
+    const projects = Component.create(HMenuButton, projectsProps);
+    const about = Component.create(HMenuButton, aboutProps);
+    const contact = Component.create(HMenuButton, contactProps);
+
     titleBarComponents = [
       title,
       flexSpacer,
@@ -158,10 +178,16 @@ const Root = () => {
       contact
     ];
   } else {
+
+    const home = Component.create(VMenuButton, homeProps);
+    const projects = Component.create(VMenuButton, projectsProps);
+    const about = Component.create(VMenuButton, aboutProps);
+    const contact = Component.create(VMenuButton, contactProps);
+
     titleBarComponents = [
       title,
       flexSpacer,
-      Component.create(MenuButton, {
+      Component.create(HMenuButton, {
         children: <FontAwesomeIcon icon={faBars} />,
         $selected: false,
         onClick: () => {
@@ -208,6 +234,7 @@ const Root = () => {
           $theme={theme}
           dir={MenuBarDirection.Vertical}
           components={hiddenSidebarComponents}
+          className='fill-height'
         />
       </Overlay>
     )}

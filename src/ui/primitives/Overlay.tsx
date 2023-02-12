@@ -40,7 +40,7 @@ const Overlay = ({ children, invisible, onClick, style, className }: Props) => {
       $theme={theme}
       $invisible={invisible}
       style={style}
-      className={`${className} fill-height`}
+      className={className ? `${className} fill-height` : 'fill-height'}
       onClick={onClick}
     >
       {children}

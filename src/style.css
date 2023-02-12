@@ -24,7 +24,4 @@ p {
 .fill-height {
   min-height: 100vh;
   max-height: 100vh;
-
-  min-height: -webkit-fill-available;
-  max-height: -webkit-fill-available;
 }
