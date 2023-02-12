@@ -4,7 +4,9 @@ import StyleProps from '../util/StyleProps';
 const Container = styled('textarea', {
   fontFamily: 'inherit',
   fontSize: 'inherit',
-  border: `1px solid rgba(0, 0, 0, 0.1)`,
+  fontWeight: 'inherit',
+  // border: `1px solid rgba(0, 0, 0, 0.1)`,
+  border: 'none',
   outline: 'none',
   resize: 'none',
   width: '100%',
@@ -13,9 +15,8 @@ const Container = styled('textarea', {
   borderRadius: '0.5em',
   padding: '0.5em',
   backdropFilter: 'blur(12px)',
+  color: 'inherit',
   ':focus': {
-    border: `1px solid rgba(0, 0, 0, 0.2)`,
-    backgroundColor: 'rgba(255, 255, 255, 0.66)',
   },
   transition: 'all 0.2s',
 });
@@ -23,6 +24,7 @@ const Container = styled('textarea', {
 export interface TextAreaProps extends StyleProps {
   placeholder?: string;
   value: string;
+  disabled?: boolean;
   onValueChange: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void;
 
   onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -34,6 +36,7 @@ const TextArea = ({
   placeholder,
   value,
   onValueChange,
+  disabled,
   style,
   className,
   onKeyDown
@@ -44,6 +47,7 @@ const TextArea = ({
     placeholder={placeholder}
     value={value}
     onChange={event => onValueChange(event.target.value, event)}
+    disabled={disabled}
     onKeyDown={onKeyDown}
   />
 );

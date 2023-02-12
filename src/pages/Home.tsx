@@ -1,12 +1,9 @@
+import Paragraph from '@/ui/primitives/Paragraph';
 import { Link } from 'react-router-dom';
 import { styled } from 'styletron-react';
 
 const Container = styled('div', {
   
-});
-
-const Paragraph = styled('p', {
-  marginTop: '1em'
 });
 
 const Home = () => {

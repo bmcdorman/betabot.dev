@@ -8,6 +8,7 @@ import Text from './Input/Text';
 import LabeledText from './Input/LabeledText';
 import StyleProps from '../util/StyleProps';
 import construct from '../util/construct';
+import resizeListener from '../util/resizeListener';
 
 export namespace FormItemModel {
   export enum Type {
@@ -47,7 +48,7 @@ export namespace FormItemModel {
 
   export const textArea = construct<TextArea>(Type.TextArea);
 
-  export const render = (formItem: FormItemModel, labelWidth?: number, extraProps: { key?: string | number } = {}) => {
+  export const render = (formItem: FormItemModel, labelWidth?: number, extraProps: { key?: string | number; disabled?: boolean; } = {}) => {
     switch (formItem.type) {
       case Type.Text: return (
         <Text
@@ -57,6 +58,7 @@ export namespace FormItemModel {
           onKeyDown={formItem.onKeyDown}
           style={formItem.style}
           className={formItem.className}
+          disabled={extraProps.disabled}
           {...extraProps}
         />
       );
@@ -70,6 +72,7 @@ export namespace FormItemModel {
           onKeyDown={formItem.onKeyDown}
           style={formItem.style}
           className={formItem.className}
+          disabled={extraProps.disabled}
           {...extraProps}
         />
       );
@@ -81,6 +84,7 @@ export namespace FormItemModel {
           onKeyDown={formItem.onKeyDown}
           style={formItem.style}
           className={formItem.className}
+          disabled={extraProps.disabled}
           {...extraProps}
         />
       );
@@ -101,6 +105,8 @@ export interface FormModel {
 
 export interface FormProps extends StyleProps {
   form: FormModel;
+  disabled?: boolean;
+  split?: boolean;
 }
 
 type Props = FormProps;
@@ -130,13 +136,15 @@ const Cell = styled('div', {
 });
 
 
-const Form = ({ style, className, form }: Props) => {
+const Form = ({ style, className, form, split, disabled }: Props) => {
   const ref = React.createRef<HTMLDivElement>();
   
   const [maxLabelWidth, setMaxLabelWidth] = React.useState(0);
 
   React.useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) {
+      return;
+    }
 
     let maxLabelWidth = 0;
     for (const id in form.items) {
@@ -146,18 +154,32 @@ const Form = ({ style, className, form }: Props) => {
       maxLabelWidth = Math.max(labelWidth, maxLabelWidth);
     }
 
-    console.log(maxLabelWidth);
-
     setMaxLabelWidth(maxLabelWidth);
   }, [ref.current]);
 
+  let nextRows = form.rows;
+  if (split) {
+    // Break up rows with more than 1 item into multiple rows
+    nextRows = [];
+    for (const row of form.rows) {
+      if (row.length <= 1) {
+        nextRows.push(row);
+        continue;
+      }
+
+      for (const id of row) {
+        nextRows.push([id]);
+      }
+    }
+  }
+
   return (
     <Container ref={ref} style={style} className={className}>
-      {form.rows.map((row, i) => (
+      {nextRows.map((row, i) => (
         <Row key={i}>
           {row.map((id, j) => (
             <Cell key={j}>
-              {FormItemModel.render(form.items[id], maxLabelWidth)}
+              {FormItemModel.render(form.items[id], maxLabelWidth, { disabled })}
             </Cell>
           ))}
         </Row>

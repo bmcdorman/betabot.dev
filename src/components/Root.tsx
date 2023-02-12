@@ -22,39 +22,40 @@ import Overlay, { OVERLAY_EASING_DURATION } from '@/ui/primitives/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const TRANSITION_WIDTH = `calc(768px + 1em)`;
+const TRANSITION_WIDTH = '800px';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
-  paddingTop: '1em',
-  [`@media screen and (max-width: ${TRANSITION_WIDTH})`]: {
-    paddingTop: 0
-  },
+  paddingTop: 0,
 }));
 
 const InnerContainer = styled('div', ({ $theme }: ThemeProps) => ({
   position: 'relative',
-  width: '768px',
-  [`@media screen and (max-width: ${TRANSITION_WIDTH})`]: {
-    width: '100%',
-    borderRadius: 0,
-    margin: 0
-  },
+  width: '100%',
+  borderRadius: 0,
+  margin: 0,
   color: IRgba.toCss($theme.textColor),
-  margin: '0 auto',
-  border: '1px solid rgba(0, 0, 0, 0.1)',
+  
 }));
+
+const PageOuterContainer = styled('div', {
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  paddingTop: '1em',
+});
 
 const PageContainer = styled('div', {
   padding: '16px',
-  backgroundColor: 'rgba(255, 255, 255, 0.66)',
+  maxWidth: TRANSITION_WIDTH,
+  marginLeft: '16px',
+  marginRight: '16px',
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  borderRadius: '16px',
+  color: 'white',
   backdropFilter: 'blur(12px)',
-  borderBottomLeftRadius: '0.5em',
-  borderBottomRightRadius: '0.5em',
-  '@media screen and (max-width: calc(768px + 1em))': {
-    borderRadius: 0,
-  },
-  borderTop: '1px solid rgba(0, 0, 0, 0.1)',
 });
 
 const HMenuButton = styled(Button, ({ $selected }: { $selected: boolean }) => ({
@@ -211,15 +212,16 @@ const Root = () => {
       <DynamicBackground />
       <InnerContainer $theme={theme}>
         <TitleBar components={titleBarComponents} />
-        <PageContainer>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <Footer />
-        </PageContainer>
+        <PageOuterContainer>
+          <PageContainer>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact width={width} />} />
+            </Routes>
+          </PageContainer>
+        </PageOuterContainer>
       </InnerContainer>
     </OuterContainer>
     {width <= MENU_COLLAPSE_WIDTH && overlay !== OverlayState.None && (
