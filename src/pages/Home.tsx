@@ -19,15 +19,8 @@ const Home = () => {
         </ul>
       </Paragraph>
       <Paragraph>
-        betabot has over 20 years of software engineering experience in a wide range of fields and early-stage startup to Fortune 100 level experience.
+        Braden McDorman, the owner of betabot, has over 20 years of software engineering experience in a wide range of fields, and early-stage startup to Fortune 100 level experience.
         We can build a robust and customer-driven solution to your problem from the ground up, or advise an existing project.
-      </Paragraph>
-      <Paragraph>
-        While our services may be more expensive than the competition, our quality of work, customer service,
-        and satisfaction guarantee will leave our clients delighted.
-      </Paragraph>
-      <Paragraph>
-        betabot is currently accepting new clients. Please <Link to='/contact'>contact us</Link> to see how we can help!
       </Paragraph>
     </Container>
   );
