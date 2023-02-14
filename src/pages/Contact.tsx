@@ -8,7 +8,7 @@ import Overlay from '@/ui/primitives/Overlay';
 import Paragraph from '@/ui/primitives/Paragraph';
 import { CONTACT_URL, EMAIL } from '../constants';
 import construct from '@/ui/util/construct';
-import { TRANSITION_WIDTH } from '@/components/constants';
+import { TRANSITION_WIDTH } from '@/components/transitionWidth';
 
 interface ContactProps {
   width: number;

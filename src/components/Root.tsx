@@ -21,7 +21,7 @@ import resizeListener, { ResizeListener } from '@/ui/util/resizeListener';
 import Overlay, { OVERLAY_EASING_DURATION } from '@/ui/primitives/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { TRANSITION_WIDTH } from './constants';
+import { TRANSITION_WIDTH } from './transitionWidth';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
