@@ -47,7 +47,7 @@ const Title = ({ style, className }: Props) => {
         nextText += finalText[text.length];
       }
       setText(nextText);
-    }, 50 + Math.random() * 150);
+    }, 50 + Math.random() * 100);
   }, [text, window.location.pathname]);
   
   const [caret, setCaret] = React.useState(true);

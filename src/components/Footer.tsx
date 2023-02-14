@@ -1,17 +1,20 @@
+import Paragraph from '@/ui/primitives/Paragraph';
 import { styled } from 'styletron-react';
 
 const Container = styled('footer', {
   textAlign: 'center',
   fontSize: '16px',
   marginTop: '32px',
+  color: 'white',
+
 });
 
 const Footer = () => {
   return (
     <Container>
-      <p>
+      <Paragraph>
         Copyright &copy; 2023 betabot LLC
-      </p>
+      </Paragraph>
     </Container>
   );
 };

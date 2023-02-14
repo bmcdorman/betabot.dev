@@ -8,6 +8,7 @@ import Overlay from '@/ui/primitives/Overlay';
 import Paragraph from '@/ui/primitives/Paragraph';
 import { CONTACT_URL, EMAIL } from '../constants';
 import construct from '@/ui/util/construct';
+import { TRANSITION_WIDTH } from '@/components/constants';
 
 interface ContactProps {
   width: number;
@@ -16,7 +17,9 @@ interface ContactProps {
 type Props = ContactProps;
 
 const Container = styled('div', {
-  
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1
 });
 
 const ButtonContainer = styled('div', {
@@ -32,8 +35,7 @@ const SubmitButton = styled(Button, {
 });
 
 interface ContactData {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   message: string;
 }
@@ -84,10 +86,13 @@ namespace State {
 type State = State.Incomplete | State.Complete | State.Sending | State.Sent | State.Error;
 
 
+const StyledFormComponent = styled(FormComponent, {
+  flex: 1
+});
+
 const Contact = ({ width }: Props) => {
   const [data, setData] = React.useState<ContactData>({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     message: '',
   });
@@ -98,8 +103,7 @@ const Contact = ({ width }: Props) => {
     setData(data);
     // Validate
     let valid = true;
-    if (data.firstName.length === 0) valid = false;
-    if (data.lastName.length === 0) valid = false;
+    if (data.name.length === 0) valid = false;
     if (data.email.length === 0) valid = false;
     // Do a regex on email
     if (data.message.length === 0) valid = false;
@@ -108,19 +112,12 @@ const Contact = ({ width }: Props) => {
 
   const form: FormModel = {
     items: {
-      firstName: FormItemModel.labeledText({
-        label: 'First Name',
-        value: data.firstName,
-        onValueChange: value => updateData({ ...data, firstName: value }),
-        placeholder: 'Jane'
+      name: FormItemModel.labeledText({
+        label: 'Name',
+        value: data.name,
+        onValueChange: value => updateData({ ...data, name: value }),
+        placeholder: 'Jane Doe'
       }),
-      lastName: {
-        type: FormItemModel.Type.LabeledText,
-        label: 'Last Name',
-        value: data.lastName,
-        onValueChange: value => updateData({ ...data, lastName: value }),
-        placeholder: 'Doe'
-      },
       email: {
         type: FormItemModel.Type.LabeledText,
         label: 'Email',
@@ -137,7 +134,7 @@ const Contact = ({ width }: Props) => {
       }
     },
     rows: [
-      ['firstName', 'lastName'],
+      ['name'],
       ['email'],
       ['message']
     ]
@@ -156,7 +153,11 @@ const Contact = ({ width }: Props) => {
   return (
     <>
       <Container>
-        <FormComponent form={form} split={width < 768} disabled={state.type === State.Type.Sending} />
+        <StyledFormComponent
+          form={form}
+          split={width < 768}
+          disabled={state.type === State.Type.Sending}
+        />
         <ButtonContainer>
           <SubmitButton disabled={state.type !== State.Type.Complete} onClick={() => {
             setState(State.SENDING);

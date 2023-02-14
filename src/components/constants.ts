@@ -1,0 +1,1 @@
+export const TRANSITION_WIDTH = '800px';

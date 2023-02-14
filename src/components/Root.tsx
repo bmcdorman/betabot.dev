@@ -21,8 +21,7 @@ import resizeListener, { ResizeListener } from '@/ui/util/resizeListener';
 import Overlay, { OVERLAY_EASING_DURATION } from '@/ui/primitives/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-
-const TRANSITION_WIDTH = '800px';
+import { TRANSITION_WIDTH } from './constants';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
@@ -44,15 +43,21 @@ const PageOuterContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: '1em',
+  marginTop: '32px'
 });
 
 const PageContainer = styled('div', {
-  padding: '16px',
-  maxWidth: TRANSITION_WIDTH,
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '32px',
+  width: TRANSITION_WIDTH,
+  [`@screen and (max-width: ${TRANSITION_WIDTH})`]: {
+    width: '100%',
+    padding: '16px',
+  },
   marginLeft: '16px',
   marginRight: '16px',
-  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
   borderRadius: '16px',
   color: 'white',
   backdropFilter: 'blur(12px)',
@@ -221,6 +226,7 @@ const Root = () => {
               <Route path="/contact" element={<Contact width={width} />} />
             </Routes>
           </PageContainer>
+          <Footer />
         </PageOuterContainer>
       </InnerContainer>
     </OuterContainer>

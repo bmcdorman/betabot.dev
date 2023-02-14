@@ -11,7 +11,7 @@ const Container = styled('textarea', {
   resize: 'none',
   width: '100%',
   margin: 0,
-  backgroundColor: 'transparent',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
   borderRadius: '0.5em',
   padding: '0.5em',
   backdropFilter: 'blur(12px)',

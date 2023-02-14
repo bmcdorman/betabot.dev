@@ -9,7 +9,7 @@ const Input = styled('input', {
   borderRadius: '0.5em',
   padding: '0.5em',
   backdropFilter: 'blur(12px)',
-  backgroundColor: 'transparent',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
   fontWeight: 'inherit',
   color: 'inherit',
   width: '100%',
