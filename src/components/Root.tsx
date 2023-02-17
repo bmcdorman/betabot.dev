@@ -22,6 +22,7 @@ import Overlay, { OVERLAY_EASING_DURATION } from '@/ui/primitives/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { TRANSITION_WIDTH } from './transitionWidth';
+import UnderConstruction from './UnderConstruction';
 
 const OuterContainer = styled('div', ({ $theme }: ThemeProps) => ({
   width: '100%',
@@ -178,10 +179,10 @@ const Root = () => {
     titleBarComponents = [
       title,
       flexSpacer,
-      home,
-      projects,
-      about,
-      contact
+      // home,
+      // projects,
+      // about,
+      // contact
     ];
   } else {
 
@@ -193,21 +194,21 @@ const Root = () => {
     titleBarComponents = [
       title,
       flexSpacer,
-      Component.create(HMenuButton, {
+      /*Component.create(HMenuButton, {
         children: <FontAwesomeIcon icon={faBars} />,
         $selected: false,
         onClick: () => {
           setOverlay(OverlayState.Mounting);
           setTimeout(() => setOverlay(OverlayState.Mounted), OVERLAY_EASING_DURATION * 1000);
         }
-      }),
+      }),*/
     ];
 
     hiddenSidebarComponents = [
       home,
-      projects,
-      about,
-      contact
+      // projects,
+      // about,
+      // contact
     ];
   }
 
@@ -219,12 +220,13 @@ const Root = () => {
         <TitleBar components={titleBarComponents} />
         <PageOuterContainer>
           <PageContainer>
-            <Routes>
+            {/*<Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact width={width} />} />
-            </Routes>
+  </Routes>*/}
+            <UnderConstruction />
           </PageContainer>
           <Footer />
         </PageOuterContainer>
